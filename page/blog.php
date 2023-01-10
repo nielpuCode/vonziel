@@ -53,7 +53,7 @@ $tampil = query("SELECT * FROM theblog");
     <div class="container3">
         <div class="content3">
             <img src="../src-pic/logoblog.png" alt="Logo Blog">
-            <a href="https://github.com/"><i class="fa-brands fa-github"></i> My Github</a>
+            <a rel="noopener" target="_blank" href="https://github.com/"><i class="fa-brands fa-github"></i> My Github</a>
             <a rel="noopener" target="_blank" href="https://www.instagram.com/danielmw101/?hl=id&theme=dark"><i class="fa-brands fa-instagram"></i> Instagram</a>
         </div>
     </div>
