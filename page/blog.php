@@ -6,6 +6,7 @@ $tampil = query("SELECT * FROM theblog");
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,8 +17,11 @@ $tampil = query("SELECT * FROM theblog");
     <script src="page.js"></script>
     <script src="https://kit.fontawesome.com/c9a949b192.js" crossorigin="anonymous"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="navbar">
         <label for="check">
@@ -26,25 +30,28 @@ $tampil = query("SELECT * FROM theblog");
         </label>
 
         <input type="checkbox" id="check" name="check">
-        
+
         <ul style="z-index: 10;">
             <li id="firstlist"><a href="../index.php">Home</a></li>
             <li><a href="blog.php">Blog</a></li>
             <li id="lastlist"><a href="createnew.php">Write New</a></li>
         </ul>
     </div>
-    
+
     <div class="kumpulbox">
         <?php foreach($tampil as $bobo) : ?>
         <div class="box">
             <div class="tempatgambar">
-                <a href="hapusblog.php?id=<?php echo $bobo['id']?>" onclick="confirmdelete()"><i class="fa-solid fa-trash"></i></a>
+                <a href="hapusblog.php?id=<?php echo $bobo['id']?>" onclick="confirmdelete()"><i
+                        class="fa-solid fa-trash"></i></a>
             </div>
-            <img id="coverimg" src="https://gmedia.net.id/upload/foto_artikel/20201016PUvWwGZWkW.png" alt="Thumbnail Blog">
+            <img id="coverimg" src="https://gmedia.net.id/upload/foto_artikel/20201016PUvWwGZWkW.png"
+                alt="Thumbnail Blog">
 
             <div class="infobox">
                 <h1 id="title"><a href="tampilblog.php?id=<?php echo $bobo['id']?>"><?php echo $bobo["title"]?></a></h1>
-                <p id="desc" style="font-weight: 500; font-size: 70%; margin: 10px; margin-bottom: 0;"><?php echo $bobo["shortdesc"]?></p>
+                <p id="desc" style="font-weight: 500; font-size: 70%; margin: 10px; margin-bottom: 0;">
+                    <?php echo $bobo["shortdesc"]?></p>
             </div>
         </div>
         <?php endforeach ?>
@@ -53,9 +60,12 @@ $tampil = query("SELECT * FROM theblog");
     <div class="container3">
         <div class="content3">
             <img src="../src-pic/logoblog.png" alt="Logo Blog">
-            <a rel="noopener" target="_blank" href="https://github.com/"><i class="fa-brands fa-github"></i> My Github</a>
-            <a rel="noopener" target="_blank" href="https://www.instagram.com/danielmw101/?hl=id&theme=dark"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a rel="noopener" target="_blank" href="https://github.com/"><i class="fa-brands fa-github"></i> My
+                Github</a>
+            <a rel="noopener" target="_blank" href="https://www.instagram.com/danielmw101/?hl=id&theme=dark"><i
+                    class="fa-brands fa-instagram"></i> Instagram</a>
         </div>
     </div>
 </body>
+
 </html>
