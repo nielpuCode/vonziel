@@ -4,13 +4,15 @@ require 'koneksi.php';
 
 if(isset($_POST["delete"])){
     $email = htmlspecialchars($_POST["email"]);
+    $thepassword = htmlspecialchars($_POST["password"]);
     $id = $_POST["id"];
 
-    $konfirmasihapus = mysqli_query($conn, "SELECT email FROM theblog WHERE id=$id");
+    $konfirmasihapus = mysqli_query($conn, "SELECT email, mypw FROM theblog WHERE id=$id");
     $yakinhapus = mysqli_fetch_assoc($konfirmasihapus);
-    $kodephp = $yakinhapus["email"];
+    $kodephpemail = $yakinhapus["email"];
+    $kodephpmypw = $yakinhapus["mypw"];
 
-    if ($kodephp == $email){
+    if ($kodephpemail == $theemail && $kodephpmypw == $thepassword){
         mysqli_query($conn, "DELETE FROM theblog WHERE id=$id");
         echo "<script>
         document.location.href = 'blog.php';
@@ -63,6 +65,9 @@ if(isset($_POST["delete"])){
     <div class="hapusblog">
         <form action="hapusblog.php" method="POST">
             <input style="margin-bottom: 0;" type="text" placeholder="your email" name="email" id="email">
+            
+            <input name="password" id="password" placeholder="Your Password">
+
             <p style="text-align: center; font-style: italic; font-size: 15px; margin-bottom: 20px; margin-top: 10px;">
                 This
                 action cannot be undone!</p>
