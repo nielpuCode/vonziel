@@ -42,15 +42,17 @@ $tampil = query("SELECT * FROM theblog");
         <?php foreach($tampil as $bobo) : ?>
         <div class="box">
             <div class="tempatgambar">
-                <a href="hapusblog.php?id=<?php echo $bobo['id']?>" onclick="confirmdelete()"><i
+                <a title="Delete this blog" href="hapusblog.php?id=<?php echo $bobo['id']?>" onclick="confirmdelete()"><i
                         class="fa-solid fa-trash"></i></a>
+                        
+                <a title="Edit this blog" href="editblog.php?id=<?php echo $bobo['id']?>" onclick="confirmdelete()"><i id="iakhir" class="fa-solid fa-pen"></i></a>
             </div>
             <img id="coverimg" src="https://gmedia.net.id/upload/foto_artikel/20201016PUvWwGZWkW.png"
                 alt="Thumbnail Blog">
 
             <div class="infobox">
                 <h1 id="title"><a href="tampilblog.php?id=<?php echo $bobo['id']?>"><?php echo $bobo["title"]?></a></h1>
-                <p id="desc" style="font-weight: 500; font-size: 70%; margin: 10px; margin-bottom: 0;">
+                <p id="desc" style="font-weight: 500; font-size: 100%; margin: 10px; margin-bottom: 0;">
                     <?php echo $bobo["shortdesc"]?></p>
             </div>
         </div>
