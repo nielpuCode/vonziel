@@ -1,10 +1,11 @@
 <?php
 require 'koneksi.php';
-$id = $_GET["id"];
-$sql = "SELECT * FROM theblog WHERE id = '$id'";
+
+$akl = $_GET["akl"];
+
+$sql = "SELECT * FROM theblog WHERE akl = '$akl'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
-
 
 ?>
 
@@ -14,7 +15,7 @@ $row = mysqli_fetch_assoc($result);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?php echo $row["title"] ?></title>
     <link rel="icon" href="../src-pic/coverblog.png">
     <link rel="stylesheet" href="../style.css">
     <script src="page/page.js"></script>
@@ -34,7 +35,7 @@ $row = mysqli_fetch_assoc($result);
         
         <ul>
             <li id="firstlist"><a href="../index.php">Home</a></li>
-            <li><a href="blog.php">Blog</a></li>
+            <li><a href="blog.php">All log</a></li>
             <li id="lastlist"><a href="createnew.php">Write New</a></li>
         </ul>
     </div>

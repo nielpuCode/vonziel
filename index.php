@@ -9,7 +9,8 @@ require 'page/koneksi.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Von Ziel</title>
+    <title>Von Ziel Blog</title>
+    <meta name="google-site-verification" content="4rB2NW_s__DDbAg02hK4SZ9h3TCvA6bB_EfLXOZi3Bo" />
     <link rel="icon" href="src-pic/coverblog.png">
     <link rel="stylesheet" href="style.css">
     <script src="page/page.js"></script>
@@ -32,7 +33,7 @@ require 'page/koneksi.php';
 
         <ul>
             <li id="firstlist"><a href="">Home</a></li>
-            <li><a href="page/blog.php">Blog</a></li>
+            <li><a href="page/blog.php">All Blog</a></li>
             <li id="lastlist"><a href="page/createnew.php">Write New</a></li>
         </ul>
     </div>
@@ -51,25 +52,30 @@ require 'page/koneksi.php';
     </div>
 
     <div class="container1">
-
-
-        <?php $counter = 0; while($bro = mysqli_fetch_assoc($result)) : ?>
+        <?php
+        $counter = 0; 
+        while($that = mysqli_fetch_assoc($result)) : 
+            $randomAkl = $that['akl'];
+            $randomkmbj = $that['kmBj'];
+            $myurl = "akl=" . $randomAkl . "&" . "kmbj=" . $randomkmbj;
+        ?>
         <div class="box">
             <img src="https://gmedia.net.id/upload/foto_artikel/20201016PUvWwGZWkW.png" alt="Thumbnail Blog">
 
             <div class="infobox">
-                <h1><a href="page/tampilblog.php?id=<?php echo $bro['id']?>"><?php echo $bro["title"]?></a></h1>
-                <p><?php echo $bro["shortdesc"]?></p>
+            <h1><a href="page/tampilblog.php?<?php echo $myurl; ?>"><?php echo $that["title"]?></a></h1>
+            <p><?php echo $that["shortdesc"]?></p>
             </div>
         </div>
         <?php
-        $counter++;
-        if($counter == 3){
+            $counter++;
+            if($counter == 3){
             break;
-        }
+            }
         ?>
         <?php endwhile; ?>
     </div>
+
 
     <div class="container2">
         <div class="content2">

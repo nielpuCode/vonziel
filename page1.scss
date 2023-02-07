@@ -622,6 +622,15 @@ body::-webkit-scrollbar-thumb{
         place-items: center;
         margin: 7rem auto;
         width: 95%;
+
+        input{
+            text-align: center;
+            border: none;
+            padding: 20px;
+            border-radius: 30px;
+            margin: 30px 10px;
+            width: 85%;
+        }
         
         #email{
             text-align: center;

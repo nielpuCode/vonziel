@@ -1,16 +1,16 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "vonziel");
 
-$id = $_GET['id'];
-$result = mysqli_query($conn, "SELECT * FROM theblog WHERE id=$id");
+$id = $_GET['akl'];
+$result = mysqli_query($conn, "SELECT * FROM theblog WHERE akl='$id'");
 $bobo = mysqli_fetch_assoc($result);
 
 if(isset($_POST["edit"])){
-    $theid = $_GET["id"];
+    $theid = $_GET["akl"];
     $theemail = htmlspecialchars($_POST["theemail"]);
     $thepassword = htmlspecialchars($_POST["password"]);
 
-    $konfirmasihapus = mysqli_query($conn, "SELECT email, mypw FROM theblog WHERE id=$theid");
+    $konfirmasihapus = mysqli_query($conn, "SELECT email, mypw FROM theblog WHERE akl = '$theid'");
     $yakinhapus = mysqli_fetch_assoc($konfirmasihapus);
     $kodephpemail = $yakinhapus["email"];
     $kodephpmypw = $yakinhapus["mypw"];
@@ -24,8 +24,28 @@ if(isset($_POST["edit"])){
         $textblog = htmlspecialchars($data["textblog"]);
         $date = date("y-m-d");
         $mypw = htmlspecialchars($data["mypw"]);
+
+        $theimage = htmlspecialchars($data["image"]);
+
+        if (!empty($theimage)){
+            $theimage = htmlspecialchars($data["image"]);
+            if (!empty($data["mypw"])) {
+                $mypw = htmlspecialchars($data["mypw"]);
+                $query = "UPDATE theblog SET title='$title', shortdesc='$shortdesc', email='$email', nama='$nama', textblog='$textblog', tanggalnulis='$date', mypw='$mypw', theimage='$theimage' WHERE akl = '$theid'";
+            } else {
+                $query = "UPDATE theblog SET title='$title', shortdesc='$shortdesc', email='$email', nama='$nama', textblog='$textblog', tanggalnulis='$date', theimage='$theimage' WHERE akl = '$theid'";
+            }
+        }else{
+            if (!empty($data["mypw"])) {
+                $mypw = htmlspecialchars($data["mypw"]);
+                $query = "UPDATE theblog SET title='$title', shortdesc='$shortdesc', email='$email', nama='$nama', textblog='$textblog', tanggalnulis='$date', mypw='$mypw' WHERE akl = '$theid'";
+            } else {
+                $query = "UPDATE theblog SET title='$title', shortdesc='$shortdesc', email='$email', nama='$nama', textblog='$textblog', tanggalnulis='$date' WHERE akl = '$theid'";
+            }
+        }
+        
     
-        $query = "UPDATE theblog SET title='$title', shortdesc='$shortdesc', email='$email', nama='$nama', textblog='$textblog', tanggalnulis='$date', mypw='$mypw' WHERE id=$theid";
+        // $query = "UPDATE theblog SET title='$title', shortdesc='$shortdesc', email='$email', nama='$nama', textblog='$textblog', tanggalnulis='$date', mypw='$mypw' WHERE akl = '$theid'";
     
         mysqli_query($conn, $query);
     
@@ -35,7 +55,8 @@ if(isset($_POST["edit"])){
             echo "
             <script>
             alert('The article was successfully Updated with the title $title');
-            document.location.href = 'blog.php';
+            // document.location.href = 'blog.php';
+            window.history.go(-2);
             </script>
             ";
         }else{
@@ -48,7 +69,8 @@ if(isset($_POST["edit"])){
     }
     else{
         echo "<script>
-        document.location.href = 'blog.php';
+        // document.location.href = 'blog.php';
+        window.history.go(-2);
         alert('Cannot delete blog because the email you entered does not match the author of this blog');
         </script>";
     }
@@ -82,13 +104,15 @@ if(isset($_POST["edit"])){
         
         <ul>
             <li id="firstlist"><a href="../index.php">Home</a></li>
-            <li><a href="blog.php">Blog</a></li>
+            <li><a href="blog.php">All Blog</a></li>
             <li id="lastlist"><a href="createnew.php">Write New</a></li>
         </ul>
     </div>
 
     <div class="editblog">
         <form action="" method="POST">  
+            <input type="text" name="image" id="image" placeholder="Link image for the thumbnail" title="The link for the thumbnail image, if it's empty, it will be random">
+
             <input name="title" id="inputtitle" type="text" placeholder="Title Here" required value="<?php echo $bobo['title']; ?>">
 
             <input name="shortdesc" id="inputdesc" type="text" placeholder="Short Description" required value="<?php echo $bobo['shortdesc']; ?>">
@@ -97,7 +121,7 @@ if(isset($_POST["edit"])){
 
             <input name="nama" id="inputname" type="text" placeholder="Your name" required value="<?php echo $bobo['nama']; ?>">
 
-            <input name="mypw" id="mypw" type="text" placeholder="Create password here" required value="<?php echo $bobo['mypw']; ?>">
+            <input name="mypw" id="mypw" type="text" placeholder="Create New password here">
             
             <button name="edit" type="submit" >Change!</button>
 
@@ -106,13 +130,13 @@ if(isset($_POST["edit"])){
             <textarea name="textblog" id="textblog" cols="0" rows="24" placeholder="Write you idea here!" required><?php echo $bobo['textblog']; ?></textarea>
 
 
-            <input style="margin-bottom: 0;" type="text" placeholder="your email" name="theemail" id="email">
+            <input style="margin-bottom: 0;" type="text" placeholder="your email" name="theemail" id="email" required>
             
-            <input name="password" id="password" placeholder="Your Password">
+            <input name="password" id="password" placeholder="Your Password" required>
 
             <p style="text-align: center; font-style: italic; font-size: 15px; margin-bottom: 20px; margin-top: 10px;">Just to make sure that this is you who take action!</p>
 
-            <input id="thisid" name="id" type="text" value="<?php echo $_GET["id"];?>" placeholder="id blog">
+            <input id="thisid" name="id" type="text" value="<?php echo $_GET["akl"];?>" placeholder="id blog">
         </form>
     </div>
 

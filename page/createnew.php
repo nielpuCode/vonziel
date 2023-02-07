@@ -12,7 +12,7 @@ if(isset($_POST["tambah"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Von Ziel</title>
+    <title>Von Ziel Blog</title>
     <link rel="icon" href="../src-pic/coverblog.png">
     <link rel="stylesheet" href="../style.css">
     <script src="page.js"></script>
@@ -38,7 +38,9 @@ if(isset($_POST["tambah"])){
     </div>
 
     <div class="creatediv">
-        <form action="" method="POST">  
+        <form action="" method="POST" enctype="multipart/form-data">  
+            <input type="text" name="image" id="image" placeholder="Link image for the thumbnail" title="The link for the thumbnail image, if it's empty, it will be random">
+
             <input name="title" id="inputtitle" type="text" placeholder="Title Here" required>
 
             <input name="shortdesc" id="inputdesc" type="text" placeholder="Short Description" required>
@@ -47,7 +49,7 @@ if(isset($_POST["tambah"])){
 
             <input name="nama" id="inputname" type="text" placeholder="Your name" required>
 
-
+            <input name="mypw" id="mypw" type="password" placeholder="Create Password Here" required>
             
             <button name="tambah" type="submit" >Create!</button>
 

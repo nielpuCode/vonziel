@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Von Ziel</title>
+    <title>Von Ziel Blog</title>
     <link rel="icon" href="../src-pic/coverblog.png">
     <link rel="stylesheet" href="../style.css">
     <script src="page.js"></script>
@@ -27,7 +27,7 @@
 
         <ul style="z-index: 10;">
             <li id="firstlist"><a href="../index.php">Home</a></li>
-            <li><a href="blog.php">Blog</a></li>
+            <li><a href="blog.php">All Blog</a></li>
             <li id="lastlist"><a href="createnew.php">Write New</a></li>
         </ul>
     </div>

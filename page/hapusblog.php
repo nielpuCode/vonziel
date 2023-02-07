@@ -3,26 +3,39 @@ require 'koneksi.php';
 
 
 if(isset($_POST["delete"])){
-    $email = htmlspecialchars($_POST["email"]);
+    $theemail = htmlspecialchars($_POST["email"]);
     $thepassword = htmlspecialchars($_POST["password"]);
     $id = $_POST["id"];
 
-    $konfirmasihapus = mysqli_query($conn, "SELECT email, mypw FROM theblog WHERE id=$id");
+    $konfirmasihapus = mysqli_query($conn, "SELECT email, mypw FROM theblog WHERE akl = '$id'");
     $yakinhapus = mysqli_fetch_assoc($konfirmasihapus);
     $kodephpemail = $yakinhapus["email"];
     $kodephpmypw = $yakinhapus["mypw"];
 
     if ($kodephpemail == $theemail && $kodephpmypw == $thepassword){
-        mysqli_query($conn, "DELETE FROM theblog WHERE id=$id");
+        mysqli_query($conn, "DELETE FROM theblog WHERE akl = '$id'");
         echo "<script>
-        document.location.href = 'blog.php';
+        window.history.go(-2);
         alert('Successfully Delete');
         </script>";
     }
+    else if ($kodephpemail != $theemail){
+        echo "<script>
+        // alert('Cannot delete blog because the email you entered does not match the author of this blog');
+        </script>";
+    }
+
+    else if($kodephpmypw != $thepassword){
+        echo "<script>
+        window.history.go(-2);
+        // alert('Cannot delete blog because the password you entered does not match the author of this blog');
+        </script>";
+    }
+    
     else{
         echo "<script>
-        document.location.href = 'blog.php';
-        alert('Cannot delete blog because the email you entered does not match the author of this blog');
+        window.history.go(-2);
+        alert('Cannot delete blog because the DATA that you entered does not match the author of this blog');
         </script>";
     }
 }
@@ -57,7 +70,7 @@ if(isset($_POST["delete"])){
 
         <ul style="z-index: 10;">
             <li id="firstlist"><a href="../index.php">Home</a></li>
-            <li><a href="blog.php">Blog</a></li>
+            <li><a href="blog.php">All Blog</a></li>
             <li id="lastlist"><a href="createnew.php">Write New</a></li>
         </ul>
     </div>
@@ -66,12 +79,12 @@ if(isset($_POST["delete"])){
         <form action="hapusblog.php" method="POST">
             <input style="margin-bottom: 0;" type="text" placeholder="your email" name="email" id="email">
             
-            <input name="password" id="password" placeholder="Your Password">
+            <input style="text-align: center; border: none; padding: 20px; border-radius: 30px; margin: 30px 10px; width: 85%;" name="password" id="password" placeholder="Your Password">
 
             <p style="text-align: center; font-style: italic; font-size: 15px; margin-bottom: 20px; margin-top: 10px;">
                 This
                 action cannot be undone!</p>
-            <input id="id" name="id" type="text" value="<?php echo $_GET["id"];?>" placeholder="id blog">
+            <input id="id" name="id" type="text" value="<?php echo $_GET["akl"];?>" placeholder="id blog">
 
             <button type="submit" name="delete">Delete</button>
         </form>
